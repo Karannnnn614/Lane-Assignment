@@ -11,21 +11,17 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // Vite dev server
-      "http://localhost:3000", // React dev server
-      process.env.CLIENT_URL || "http://localhost:5173",
-    ],
+    origin: true, // Allow all origins temporarily for debugging
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/lane-feedback")
+  .connect(process.env.MONGODB_URI  )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
